@@ -123,6 +123,15 @@ impl<E: IcedEditor> Editor for IcedEditorWrapper<E> {
         self.iced_state.size()
     }
 
+    fn set_size(&self, width: u32, height: u32) -> bool {
+        self.iced_state.size.store((width, height));
+        true
+    }
+
+    fn can_resize(&self) -> bool {
+        true
+    }
+
     fn set_scale_factor(&self, factor: f32) -> bool {
         // If the editor is currently open then the host must not change the current HiDPI scale as
         // we don't have a way to handle that. Ableton Live does this.
